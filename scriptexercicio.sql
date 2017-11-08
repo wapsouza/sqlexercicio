@@ -40,3 +40,16 @@ create table grade_curricular (
     constraint fk_siglacurso foreign key (sigla_curso) references curso(sigla),
     constraint id_gradecurricular primary key (sigla_curso, ano, semestre)    
 )
+
+
+create table periodo (
+    sigla_curso varchar (5),
+    ano_grade smallint,
+    semestre_grade char(1),
+    numero tinyint,
+    
+    constraint fk_siglacursoperiodo foreign key (sigla_curso) references grade_curricular(sigla_curso),
+    constraint fk_anograde foreign key (ano_grade) references grade_curricular(ano),
+    constraint fk_semestregrade foreign key (semestre_grade) references grade_curricular(semestre),
+    constraint id_periodo primary key (sigla_curso, ano_grade, semestre_grade, numero)        
+)
