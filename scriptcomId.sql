@@ -1,4 +1,7 @@
-create database exercicio
+//* temos que verificar as referencias, pois a tabela resposta não tem "pé de galinha vindo de outra tabela", então provavelmente estamos errando nas referencias em todas as tabelas!!  VINICIUS R. Já conclui as 5 tabelas que restavam!! *//
+
+
+create database sqletapa1
 go
 
 create table disciplina (
@@ -110,7 +113,7 @@ create table turma (
 
 	constraint pk_turma primary key(id_turma),
 	constraint fk_turma foreign key (id_turma) references professor (id_professor),
-	constraint fk_turma foreign key (id_turma) references disciplinaofertada (id_disciplinaofertada),
+	constraint fk_turma1 foreign key (id_turma) references disciplina_ofertada (id_disciplinaofertada),
 	constraint uq_turma unique (nome_disciplina,ano_ofertado,semestre_ofertado,id)
 );
 
@@ -124,6 +127,84 @@ create table cursoturma (
 
 	constraint uq_cursoturma unique (sigla_curso, nome_disciplina, ano_ofertado,semestre_ofertado,id_turma),
 	constraint fk_cursoturma foreign key (id_cursoturma) references turma (id_turma),
-	constraint fk_cursoturma foreign key (id_cursoturma) references curso(id_curso),
+	constraint fk_cursoturma1 foreign key (id_cursoturma) references curso(id_curso),
 	constraint pk_cursoturma primary key (id_cursoturma)
+);
+
+create table matricula (
+	ra_aluno int,
+	nome_disciplina varchar(240),
+	ano_ofertado smallint,
+	semestre_ofertado char(1),
+	id_turma char(1),
+	id_matricula int,
+
+	constraint uq_matricula unique (ra_aluno, nome_disciplina, ano_ofertado, semestre_ofertado, id_turma),
+	constraint fk_matricula foreign key (id_matricula) references aluno (id_aluno),
+	constraint fk_matricula1 foreign key (id_matricula) references turma (id_turma),
+	constraint pk_matricula primary key (id_matricula)
+);
+
+create table questao (
+	nome_disciplina varchar(240),
+	ano_ofertado smallint,
+	semestre_ofertado char(1),
+	id_turma char(1),
+	numero int,
+	data_limite_entrega date,
+	descricao text,
+	data date,
+	id_questao int,
+
+	constraint uq_questao unique (nome_disciplina, ano_ofertado, semestre_ofertado, id_turma, numero),
+	constraint fk_questao foreign key (id_questao) references turma (id_turma),
+	constraint pk_questao primary key (id_questao)
+);
+
+create table arquivosquestao (
+	nome_disciplina varchar(240),
+	ano_ofertado smallint,
+	semestre_ofertado char(1),
+	id_turma char(1),
+	numero_questao int,
+	arquivo varchar(500),
+	id_arquivosquestao int,
+
+	constraint uq_arquivosquestao unique ( nome_disciplina, ano_ofertado, semestre_ofertado, id_turma, numero_questao, arquivo),
+	constraint fk_arquivosquestao foreign key (id_arquivosquestao) references questao (id_questao),
+	constraint pk_arquivosquestao primary key (id_arquivosquestao)
+);
+
+create table resposta (
+	nome_disciplina varchar(240),
+	ano_ofertado smallint,
+	semestre_ofertado char(1),
+	id_turma char(1),
+	numero_questao int,
+	ra_aluno int,
+	data_avaliacao date,
+	nota decimal(4,2),
+	avaliacao text,
+	descricao text,
+	data_de_envio date,
+	id_resposta int,
+
+	constraint uq_resposta unique (nome_disciplina, ano_ofertado, semestre_ofertado, id_turma, numero_questao, ra_aluno),
+	constraint pk_repsosta primary key (id_resposta)	
+);
+
+
+create table arquivosresposta (
+	nome_disciplina varchar(240),
+	ano_ofertado smallint,
+	semestre_ofertado char(1),
+	id_turma char(1),
+	numero_questao int,
+	ra_aluno int,
+	arquivo varchar(500),
+	id_arquivosresposta int,
+
+	constraint uq_arquivosresposta unique ( nome_disciplina, ano_ofertado, semestre_ofertado, id_turma, numero_questao, ra_aluno, arquivo),
+	constraint fk_arquivosreposta foreign key (id_arquivosresposta) references resposta (id_resposta),
+	constraint pk_arquivosresposta primary key (id_arquivosresposta)	
 );
