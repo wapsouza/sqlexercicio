@@ -1,210 +1,200 @@
-//* temos que verificar as referencias, pois a tabela resposta não tem "pé de galinha vindo de outra tabela", então provavelmente estamos errando nas referencias em todas as tabelas!!  VINICIUS R. Já conclui as 5 tabelas que restavam!! *//
+/* 
+Isaque Felizardo - 1700525
+Wallace Paula Souza -  1700251
+Kaua Ramirez - 1700652
+Natalia Nadgela - 1700653
+Vin�cius dos reis Oliveira - 1701731
+*/
 
-
-create database sqletapa1
+create database Pmaster
 go
 
-create table disciplina (
-    nome varchar(240),
-    carga_horaria tinyint,
-    teoria decimal(3),
-    pratica decimal (3),
+use Pmaster
+go
+
+create table Disciplina (
+    id int IDENTITY(1,1) not null,
+    nome varchar(240) not null,
+    carga_horaria tinyint not null,
+    teoria decimal(3) not null,
+    pratica decimal (3) not null,
     ementa text,
     competencias text,
     habilidades text,
     conteudo text,
     biografia_basica text,
     biografia_complementar text,
-	id_disciplina int,
-    
-    constraint id_disciplina primary key (id_disciplina),
+
+    constraint id_disciplina primary key (id),
 	constraint uq_nome unique(nome)
 );
-
-create table curso (
+go
+create table Curso (
+    id int IDENTITY(1,1) not null ,
     sigla varchar (5),
-    nome varchar (50),
-	id_curso int,
+    nome varchar (50) not null ,
 
-    constraint pk_curso primary key (id_curso),
-    constraint uq_curso unique (nome,sigla)
+    constraint pk_curso primary key (id),
+    constraint uq_curso unique (nome, sigla)
 );
+go
 
-create table professor (
-    ra int,
-    apelido varchar(30),
-    nome varchar(120),
-    email varchar(80),
+create table Professor (
+   id int IDENTITY(1,1) not null,
+    ra int not null,
+    apelido varchar(30) not null,
+    nome varchar (120) not null ,
+    email varchar(80) not null,
     celular varchar(11),
-	id_professor int,
-    
-    constraint pk_professor primary key (id_professor),
+
+    constraint pk_professor primary key (id),
     constraint uq_professor unique (apelido,ra)
 );
+go
 
-create table aluno (
-	ra int,
-	nome varchar (120),
-	email varchar(80),
-	celular varchar(11),
-	sigla_curso char(2),
-	id_aluno int,
+create table Aluno (
+  	id int IDENTITY(1,1) not null,
+	 ra int not null,
+	 nome varchar (120) not null ,
+	 email varchar (80) not null,
+	 celular varchar(11),
+	 sigla_curso char(2),
 
-	constraint pk_aluno primary key (id_aluno),
+	constraint pk_aluno primary key (id),
 	constraint uq_aluno unique (ra),
 );
+go
 
-
-create table grade_curricular (
-    sigla_curso varchar (5),
+create table GradeCurricular (
+    id int IDENTITY(1,1) not null,
     ano smallint,
-    semestre char(1),
-	id_gradecurricular int,
-    
-    constraint fk_siglacurso foreign key (id_gradecurricular) references curso(id_curso),
-    constraint uq_gradecurricular unique (ano, semestre,sigla_curso),
-	constraint pk_gradecurricular primary key (id_gradecurricular)
-);
+    semestre char(1) not null,
+    id_curso int not null,
 
-create table periodo (
-    sigla_curso varchar (5),
-    ano_grade smallint,
-    semestre_grade char(1),
+    constraint pk_gradecurricular primary key (id),
+    constraint fk_idCurso foreign key (id_curso) references Curso(id),
+    constraint uq_gradecurricular unique (ano, semestre),
+);
+go
+
+create table Periodo (
+	  id int IDENTITY(1,1) not null,
     numero tinyint,
-	id_periodo int,
-    
-    constraint pk_periodo primary key (id_periodo),
-	constraint uq_periodo unique(sigla_curso, ano_grade, semestre_grade, numero),
-	constraint fk_periodo foreign key (id_periodo) references grade_curricular(id_gradecurricular),        
+	  id_gradecurricular int not null,
+
+    constraint pk_periodo primary key (id),
+    constraint uq_periodo unique(numero),
+    constraint fk_periodo foreign key (id_gradecurricular) references GradeCurricular(id),
 );
+go
 
-create table periodo_disciplina (
-	sigla_curso varchar (5),
-    ano_grade smallint,
-	semestre_grade char(1),
-    numero_periodo tinyint,
-	nome_disciplina varchar (240),
-	id_periododisciplina int,
+create table PeriodoDisciplina (
+	id int IDENTITY(1,1) not null,
+	id_periodo int not null,
+  id_disciplina int not null,
 
-	constraint pk_periododisciplina primary key (id_periododisciplina),
-	constraint uq_periododisciplina unique (sigla_curso,ano_grade,semestre_grade,numero_periodo,nome_disciplina),
-	constraint fk_periododisciplina foreign key (id_periododisciplina) references periodo(id_periodo)
+	constraint pk_periododisciplina primary key (id),
+	constraint fk_periododisciplina foreign key (id_periodo) references Periodo(id),
+  constraint fk_id_disciplina foreign key (id_disciplina) references Disciplina(id),
 );
+go
 
-create table disciplina_ofertada (
-	nome_disciplina varchar(240),
+create table DisciplinaOfertada (
+	id  int IDENTITY(1,1) not null,
 	ano smallint,
 	semestre char(1),
-	id_disciplinaofertada int
+	id_disciplina int  not null,
 
-	constraint pk_iddisciplinaofertada primary key(id_disciplinaofertada),
-	constraint uq_iddisciplinaofertada unique (nome_disciplina, ano, semestre),
-	constraint fk_iddisciplinaofertada foreign key (id_disciplinaofertada) references disciplina(id_disciplina)
+
+	constraint pk_iddisciplinaofertada primary key(id),
+	constraint uq_iddisciplinaofertada unique (ano, semestre),
+	constraint fk_iddisciplinaofertada foreign key (id_disciplina) references Disciplina(id)
 );
+go
 
-create table turma (
-	nome_disciplina varchar(240),
-	ano_ofertado smallint,
-	semestre_ofertado char(1),
-	id char(1),
-	turno varchar(15),
-	ra_professor int,
-	id_turma int
+create table Turma (
+	id int IDENTITY(1,1) not null,
+	turno varchar(15) not null,
+	id_professor int not null,
+	id_disciplinaofertada int not null,
 
-	constraint pk_turma primary key(id_turma),
-	constraint fk_turma foreign key (id_turma) references professor (id_professor),
-	constraint fk_turma1 foreign key (id_turma) references disciplina_ofertada (id_disciplinaofertada),
-	constraint uq_turma unique (nome_disciplina,ano_ofertado,semestre_ofertado,id)
+	constraint pk_turma primary key(id),
+	constraint fk_id_professor foreign key (id_professor) references Professor(id),
+	constraint fk_id_disciplinaOfertada foreign key (id_disciplinaofertada) references DisciplinaOfertada(id),
 );
+go
 
-create table cursoturma (
-	sigla_curso varchar(5),
-	nome_disciplina varchar(240),
-	ano_ofertado smallint,
-	semestre_ofertado char(1),
-	id_turma char (1),
-	id_cursoturma int,
+create table CursoTurma (
+	id int IDENTITY(1,1) not null,
+	id_turma int not null,
+	id_curso int not null,
 
-	constraint uq_cursoturma unique (sigla_curso, nome_disciplina, ano_ofertado,semestre_ofertado,id_turma),
-	constraint fk_cursoturma foreign key (id_cursoturma) references turma (id_turma),
-	constraint fk_cursoturma1 foreign key (id_cursoturma) references curso(id_curso),
-	constraint pk_cursoturma primary key (id_cursoturma)
+	constraint pk_cursoturma primary key (id),
+	constraint fk_id_curso foreign key (id_curso) references Curso(id),
+	constraint fk_id_turma foreign key (id_turma) references Turma(id),
 );
+go
 
-create table matricula (
-	ra_aluno int,
-	nome_disciplina varchar(240),
-	ano_ofertado smallint,
-	semestre_ofertado char(1),
-	id_turma char(1),
-	id_matricula int,
+create table Matricula( /* Pronto */
+	id int IDENTITY(1,1) not null,
+	id_turma int not null,
+	id_aluno  int not null,
 
-	constraint uq_matricula unique (ra_aluno, nome_disciplina, ano_ofertado, semestre_ofertado, id_turma),
-	constraint fk_matricula foreign key (id_matricula) references aluno (id_aluno),
-	constraint fk_matricula1 foreign key (id_matricula) references turma (id_turma),
-	constraint pk_matricula primary key (id_matricula)
+	constraint Pk_Matricula primary key (id),
+	constraint Fk_matricula_id_turma foreign key (id_turma) references Turma(id),
+	constraint Fk_matricula_id_aluno foreign key (id_aluno) references Aluno(id),
 );
+go
 
-create table questao (
-	nome_disciplina varchar(240),
-	ano_ofertado smallint,
-	semestre_ofertado char(1),
-	id_turma char(1),
-	numero int,
+create table Questao (
+  id int IDENTITY(1,1) not null,
+	numero int not null,
 	data_limite_entrega date,
 	descricao text,
 	data date,
-	id_questao int,
+  id_turma int not null,
 
-	constraint uq_questao unique (nome_disciplina, ano_ofertado, semestre_ofertado, id_turma, numero),
-	constraint fk_questao foreign key (id_questao) references turma (id_turma),
-	constraint pk_questao primary key (id_questao)
+  constraint pk_questao primary key (id),
+  constraint fk_questao_id_turma foreign key (id_turma) references Turma(id),
+	constraint uq_questao unique (numero)
 );
+go
 
-create table arquivosquestao (
-	nome_disciplina varchar(240),
-	ano_ofertado smallint,
-	semestre_ofertado char(1),
-	id_turma char(1),
-	numero_questao int,
-	arquivo varchar(500),
-	id_arquivosquestao int,
+create table ArquivosQuestao (
+  id int IDENTITY(1,1) not null,
+	arquivo varchar(500) not null,
+  id_questao int not null,
 
-	constraint uq_arquivosquestao unique ( nome_disciplina, ano_ofertado, semestre_ofertado, id_turma, numero_questao, arquivo),
-	constraint fk_arquivosquestao foreign key (id_arquivosquestao) references questao (id_questao),
-	constraint pk_arquivosquestao primary key (id_arquivosquestao)
+  constraint pk_arquivosquestao primary key (id),
+	constraint uq_arquivosquestao unique (arquivo),
+	constraint fk_arquivosquestao foreign key (id_questao) references Questao(id),
+
 );
+go
 
-create table resposta (
-	nome_disciplina varchar(240),
-	ano_ofertado smallint,
-	semestre_ofertado char(1),
-	id_turma char(1),
-	numero_questao int,
-	ra_aluno int,
+create table Resposta (
+  id int IDENTITY(1,1) not null,
+  ra_aluno int not null,
 	data_avaliacao date,
 	nota decimal(4,2),
 	avaliacao text,
 	descricao text,
 	data_de_envio date,
-	id_resposta int,
+	id_questao int not null,
 
-	constraint uq_resposta unique (nome_disciplina, ano_ofertado, semestre_ofertado, id_turma, numero_questao, ra_aluno),
-	constraint pk_repsosta primary key (id_resposta)	
+	constraint uq_resposta unique (ra_aluno),
+	constraint pk_repsosta primary key (id),
+  constraint fk_resposta foreign key (id_questao) references Questao(id),
 );
-
+go
 
 create table arquivosresposta (
-	nome_disciplina varchar(240),
-	ano_ofertado smallint,
-	semestre_ofertado char(1),
-	id_turma char(1),
-	numero_questao int,
-	ra_aluno int,
+    id int IDENTITY(1,1) not null,
 	arquivo varchar(500),
-	id_arquivosresposta int,
+    id_resposta int not null,
 
-	constraint uq_arquivosresposta unique ( nome_disciplina, ano_ofertado, semestre_ofertado, id_turma, numero_questao, ra_aluno, arquivo),
-	constraint fk_arquivosreposta foreign key (id_arquivosresposta) references resposta (id_resposta),
-	constraint pk_arquivosresposta primary key (id_arquivosresposta)	
+	constraint uq_arquivosresposta unique (arquivo),
+	constraint fk_arquivosreposta foreign key (id_resposta) references Resposta(id),
+	constraint pk_arquivosresposta primary key (id)
 );
+go
