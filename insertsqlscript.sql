@@ -1,3 +1,13 @@
+/* SCRIPT INSERT
+Isaque Felizardo - 1700525
+Wallace Paula Souza -  1700251
+Kaua Ramirez - 1700652
+Natalia Nadgela - 1700653
+Vinícius dos reis Oliveira - 1701731
+*/
+
+
+
 insert into Disciplina (nome, carga_horaria, teoria, pratica, ementa, competencias, habilidades, conteudo, biografia_basica, biografia_complementar) values ( 'linguagem SQL', 80, 40, 40, 'conhecimento linguagem SQL com criacao e manipulacao de dados', 'logica de programacao', 'raciocinio logico', 'banco de dados', 'criando seu bd', 'google.com')
 insert into Disciplina (nome, carga_horaria, teoria, pratica, ementa, competencias, habilidades, conteudo, biografia_basica, biografia_complementar) values ( 'linguagem de programacao II', 100, 40, 60, 'continuacao de linguagem de programacao I', ' linguagem de programacao I', 'raciocinio logico', 'python', 'programando com python', 'youtube.com')
 insert into Disciplina (nome, carga_horaria, teoria, pratica, ementa, competencias, habilidades, conteudo, biografia_basica, biografia_complementar) values ( 'engenharia de software', 80, 60, 20, 'criacao de um projeto de software e todas etapas de seu desenvolvimento',' linguagem de programacao', 'seguimento das regras de organização de um projeto', 'engenharia de software completa', 'Linha do tempo de um software', 'google.com' )
