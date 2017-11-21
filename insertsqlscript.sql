@@ -157,7 +157,7 @@ insert into Resposta ( ra_aluno, data_avaliacao, nota, avaliacao, descricao, dat
 insert into Resposta ( ra_aluno, data_avaliacao, nota, avaliacao, descricao, data_de_envio, id_questao) values (52017, '12-1-2017', '7', 'avaliacao GP', 'prova np2','12-1-2017', 5)
 
 
-insert into arquivosresposta (arquivo, id_resposta) values ('alternativa A', 6)
+insert into arquivosresposta (arquivo, id_resposta) values ('alternativa A', 1)
 insert into arquivosresposta (arquivo, id_resposta) values ('alternativa B', 2)
 insert into arquivosresposta (arquivo, id_resposta) values ('alternativa C', 3)
 insert into arquivosresposta (arquivo, id_resposta) values ('alternativa D', 4)
