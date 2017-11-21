@@ -1,8 +1,8 @@
-insert into Disciplina (nome, carga_horaria, teoria, pratica, competencias, conteudo, biografia_basica) values ( 'linguagem SQL', '80', '40', '40', 'logica de programacao', 'banco de dados', 'criando seu bd' )
-insert into Disciplina (nome, carga_horaria, teoria, pratica, competencias, conteudo, biografia_basica) values ( 'linguagem de programacao II', '100', '40', '60', ' linguagem de programacao I', 'python', 'programando com python' )
-insert into Disciplina (nome, carga_horaria, teoria, pratica, competencias, conteudo, biografia_basica) values ( 'engenharia de software', '80', '60', '20', '', 'desenvolvimento de projeto de software', 'Linha do tempo de um software' )
-insert into Disciplina (nome, carga_horaria, teoria, pratica, competencias, conteudo, biografia_basica) values ( 'IOT', '80', '40', '40', '', 'internet das coisas', 'conectando mundos' )
-insert into Disciplina (nome, carga_horaria, teoria, pratica, competencias, conteudo, biografia_basica) values ( 'Gestão de projetos', '80', '80', '0', '', 'criando e gerenciando projetos', 'requisitos essencais para a criancao de um projeto' )
+insert into Disciplina (nome, carga_horaria, teoria, pratica, ementa, competencias, habilidades, conteudo, biografia_basica, biografia_complementar) values ( 'linguagem SQL', '80', '40', '40', 'conhecimento linguagem SQL com criacao e manipulacao de dados', 'logica de programacao', 'raciocinio logico', 'banco de dados', 'criando seu bd', 'google.com')
+insert into Disciplina (nome, carga_horaria, teoria, pratica, ementa, competencias, habilidades, conteudo, biografia_basica, biografia_complementar) values ( 'linguagem de programacao II', '100', '40', '60', 'continuacao de linguagem de programacao I', ' linguagem de programacao I', 'raciocinio logico', 'python', 'programando com python', 'youtube.com')
+insert into Disciplina (nome, carga_horaria, teoria, pratica, ementa, competencias, habilidades, conteudo, biografia_basica, biografia_complementar) values ( 'engenharia de software', '80', '60', '20', 'criacao de um projeto de software e todas etapas de seu desenvolvimento',' linguagem de programacao', 'seguimento das regras de organização de um projeto', 'engenharia de software completa', 'Linha do tempo de um software', 'google.com' )
+insert into Disciplina (nome, carga_horaria, teoria, pratica, ementa, competencias, habilidades, conteudo, biografia_basica, biografia_complementar) values ( 'IOT', '80', '40', '40', 'internet das coisas', 'raciocinio lógico', 'Logica de programacao', 'introducao completa a iot', 'conectando mundos', 'google.com' )
+insert into Disciplina (nome, carga_horaria, teoria, pratica, ementa, competencias, habilidades, conteudo, biografia_basica, biografia_complementar) values ( 'Gestão de projetos', '80', '80', '0', 'gerencimento de projetos', 'criando e gerenciando projetos', ' gerenciamento de pessoas', 'conteudo completo', 'requisitos essencais para a criancao de um projeto', 'google.com' )
 
 
 insert into Curso (sigla, nome) values ('SI', 'Sistemas de informacao')
@@ -42,6 +42,7 @@ insert into GradeCurricular (ano, semestre, id_curso) values (2014, 7, 2)
 insert into GradeCurricular (ano, semestre, id_curso) values (2016, 3, 1)
 insert into GradeCurricular (ano, semestre, id_curso) values (2014, 8, 5)
 
+
 insert into Periodo (numero, id_gradecurricular) values ( 6, 2)
 insert into Periodo (numero, id_gradecurricular) values ( 1, 10)
 insert into Periodo (numero, id_gradecurricular) values ( 3, 3)
@@ -65,6 +66,7 @@ insert into PeriodoDisciplina (id_periodo, id_disciplina) values ( 1, 5)
 insert into PeriodoDisciplina (id_periodo, id_disciplina) values ( 10, 4)
 insert into PeriodoDisciplina (id_periodo, id_disciplina) values ( 6, 2)
 
+
 insert into DisciplinaOfertada (ano, semestre, id_disciplina) values (2017, 2, 1)
 insert into DisciplinaOfertada (ano, semestre, id_disciplina) values (2015, 1, 3)
 insert into DisciplinaOfertada (ano, semestre, id_disciplina) values (2015, 8, 3)
@@ -76,6 +78,7 @@ insert into DisciplinaOfertada (ano, semestre, id_disciplina) values (2016, 4, 2
 insert into DisciplinaOfertada (ano, semestre, id_disciplina) values (2017, 1, 1)
 insert into DisciplinaOfertada (ano, semestre, id_disciplina) values (2015, 5, 4)
 
+
 insert into Turma (turno, id_professor, id_disciplinaofertada) values ('noturno', 2, 5)
 insert into Turma (turno, id_professor, id_disciplinaofertada) values ('matutino', 1, 4)
 insert into Turma (turno, id_professor, id_disciplinaofertada) values ('matutino', 3, 3)
@@ -83,12 +86,14 @@ insert into Turma (turno, id_professor, id_disciplinaofertada) values ('matutino
 insert into Turma (turno, id_professor, id_disciplinaofertada) values ('noite', 4, 2)
 insert into Turma (turno, id_professor, id_disciplinaofertada) values ('noite', 5, 1)
 
+
 insert into CursoTurma (id_turma, id_curso) values (5, 4)
 insert into CursoTurma (id_turma, id_curso) values (1, 1)
 insert into CursoTurma (id_turma, id_curso) values (3, 2)
 insert into CursoTurma (id_turma, id_curso) values (2, 1)
 insert into CursoTurma (id_turma, id_curso) values (6, 5)
 insert into CursoTurma (id_turma, id_curso) values (4, 3)
+
 
 insert into Matricula (id_turma, id_aluno) values (1, 1)
 insert into Matricula (id_turma, id_aluno) values (1, 2)
@@ -152,7 +157,7 @@ insert into Resposta ( ra_aluno, data_avaliacao, nota, avaliacao, descricao, dat
 insert into Resposta ( ra_aluno, data_avaliacao, nota, avaliacao, descricao, data_de_envio, id_questao) values (52017, '12-1-2017', '7', 'avaliacao GP', 'prova np2','12-1-2017', 5)
 
 
-insert into arquivosresposta (arquivo, id_resposta) values ('alternativa A', 1)
+insert into arquivosresposta (arquivo, id_resposta) values ('alternativa A', 6)
 insert into arquivosresposta (arquivo, id_resposta) values ('alternativa B', 2)
 insert into arquivosresposta (arquivo, id_resposta) values ('alternativa C', 3)
 insert into arquivosresposta (arquivo, id_resposta) values ('alternativa D', 4)
