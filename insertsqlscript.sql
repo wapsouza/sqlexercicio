@@ -135,3 +135,25 @@ insert into Questao (numero, data_limite_entrega, descricao, data, id_turma) val
 insert into Questao (numero, data_limite_entrega, descricao, data, id_turma) values (9, '11-18-2017', 'explique', '10-20-2017', 4)
 insert into Questao (numero, data_limite_entrega, descricao, data, id_turma) values (10, '11-25-2017', 'assinale a alternativa correta', '10-20-2017', 5)
 insert into Questao (numero, data_limite_entrega, descricao, data, id_turma) values (11, '11-25-2017', 'assinale a alternativa correta', '10-20-2017', 6)
+
+
+insert into ArquivosQuestao (arquivo, id_questao) values ( 'Quem criou a linguagem SQL?', 1)
+insert into ArquivosQuestao (arquivo, id_questao) values ( 'Para que serve o comando "create database"?', 2)
+insert into ArquivosQuestao (arquivo, id_questao) values ( 'Para que serve o SQL server?', 3)
+insert into ArquivosQuestao (arquivo, id_questao) values ( 'Para que serve a funcao insert?', 1)
+insert into ArquivosQuestao (arquivo, id_questao) values ( 'Para que serve a funcao select? ', 5)
+insert into ArquivosQuestao (arquivo, id_questao) values ( 'Para que serve a funcao drop?', 6)
+
+
+insert into Resposta ( ra_aluno, data_avaliacao, nota, avaliacao, descricao, data_de_envio, id_questao) values (12017, '12-1-2017', '8', 'avaliacao ES', 'prova np2','12-1-2017', 1)
+insert into Resposta ( ra_aluno, data_avaliacao, nota, avaliacao, descricao, data_de_envio, id_questao) values (22017, '12-1-2017', '10', 'avaliacao LP1', 'prova np2','12-1-2017', 2)
+insert into Resposta ( ra_aluno, data_avaliacao, nota, avaliacao, descricao, data_de_envio, id_questao) values (32017, '12-1-2017', '9', 'avaliacao IOT', 'prova np2','12-1-2017', 3)
+insert into Resposta ( ra_aluno, data_avaliacao, nota, avaliacao, descricao, data_de_envio, id_questao) values (42017, '12-1-2017', '9', 'avaliacao SQL', 'prova np2','12-1-2017', 4)
+insert into Resposta ( ra_aluno, data_avaliacao, nota, avaliacao, descricao, data_de_envio, id_questao) values (52017, '12-1-2017', '7', 'avaliacao GP', 'prova np2','12-1-2017', 5)
+
+
+insert into arquivosresposta (arquivo, id_resposta) values ('alternativa A', 1)
+insert into arquivosresposta (arquivo, id_resposta) values ('alternativa B', 2)
+insert into arquivosresposta (arquivo, id_resposta) values ('alternativa C', 3)
+insert into arquivosresposta (arquivo, id_resposta) values ('alternativa D', 4)
+insert into arquivosresposta (arquivo, id_resposta) values ('alternativa E', 5)
