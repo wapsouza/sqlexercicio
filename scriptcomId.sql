@@ -25,13 +25,13 @@ create table Disciplina (
     biografia_basica text,
     biografia_complementar text,
 
-    constraint id_disciplina primary key (id),
+    constraint pk_disciplina primary key (id),
 	constraint uq_nome unique(nome)
 );
 go
 create table Curso (
     id int IDENTITY(1,1) not null ,
-    sigla varchar (5),
+    sigla varchar (5) not null,
     nome varchar (50) not null ,
 
     constraint pk_curso primary key (id),
@@ -86,8 +86,8 @@ create table Periodo (
 	id_gradecurricular int not null,
 
     constraint pk_periodo primary key (id),
-    constraint uq_periodo unique(numero),
-    constraint fk_periodo foreign key (id_gradecurricular) references GradeCurricular(id),
+    constraint uq_periodo unique(numero, id_gradecurricular),
+    constraint fk_periodo foreign key (id_gradecurricular) references GradeCurricular(id)
 );
 go
 
@@ -197,7 +197,7 @@ create table arquivosresposta (
     id_resposta int not null,
 
 	constraint pk_arquivosresposta primary key (id),
-	constraint uq_arquivosresposta unique (arquivo),
+	constraint uq_arquivosresposta unique (arquivo, id_resposta),
 	constraint fk_arquivosreposta foreign key (id_resposta) references Resposta(id),
 	
 );
