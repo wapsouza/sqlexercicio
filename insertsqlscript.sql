@@ -108,7 +108,9 @@ insert into DisciplinaOfertada (ano, semestre, id_disciplina) values
 (2018, 8, 1),
 (2018, 4, 2),
 (2018, 1, 1),
-(2018, 1, 2);
+(2018, 1, 2),
+(2018, 1, 3),
+(2018, 1, 4);
 
 
 insert into Turma (turno, id_professor, id_disciplinaofertada) values 
@@ -242,3 +244,4 @@ insert into arquivosresposta (arquivo, id_resposta) values
 ('alternativa C', 13),
 ('alternativa D', 14),
 ('alternativa E', 15);
+
