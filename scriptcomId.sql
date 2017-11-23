@@ -3,7 +3,7 @@ Isaque Felizardo - 1700525
 Wallace Paula Souza -  1700251
 Kaua Ramirez - 1700652
 Natalia Nadgela - 1700653
-Vinícius dos reis Oliveira - 1701731
+VinÃ­cius dos reis Oliveira - 1701731
 */
 
 create database Pmaster
@@ -36,11 +36,12 @@ create table Curso (
 
     constraint pk_curso primary key (id),
     constraint uq_curso unique (nome, sigla)
+
 );
 go
 
 create table Professor (
-   id int IDENTITY(1,1) not null,
+    id int IDENTITY(1,1) not null,
     ra int not null,
     apelido varchar(30) not null,
     nome varchar (120) not null ,
@@ -54,14 +55,16 @@ go
 
 create table Aluno (
   	id int IDENTITY(1,1) not null,
-	 ra int not null,
-	 nome varchar (120) not null ,
-	 email varchar (80) not null,
-	 celular varchar(11),
-	 sigla_curso char(2),
+	ra int not null,
+	id_curso int not null,	
+	nome varchar (120) not null ,
+	email varchar (80) not null,
+	celular varchar(11),
+	
 
 	constraint pk_aluno primary key (id),
-	constraint uq_aluno unique (ra),
+	constraint fk_idcurso foreign key (id_curso) references Curso(id),
+	constraint uq_aluno unique (ra)
 );
 go
 
@@ -72,15 +75,15 @@ create table GradeCurricular (
     id_curso int not null,
 
     constraint pk_gradecurricular primary key (id),
-    constraint fk_idCurso foreign key (id_curso) references Curso(id),
-    constraint uq_gradecurricular unique (ano, semestre),
+    constraint fk_curso foreign key (id_curso) references Curso(id),
+    constraint uq_gradecurricular unique (ano, semestre, id_curso)
 );
 go
 
 create table Periodo (
-	  id int IDENTITY(1,1) not null,
+	id int IDENTITY(1,1) not null,
     numero tinyint,
-	  id_gradecurricular int not null,
+	id_gradecurricular int not null,
 
     constraint pk_periodo primary key (id),
     constraint uq_periodo unique(numero),
@@ -91,11 +94,11 @@ go
 create table PeriodoDisciplina (
 	id int IDENTITY(1,1) not null,
 	id_periodo int not null,
-  id_disciplina int not null,
+    id_disciplina int not null,
 
 	constraint pk_periododisciplina primary key (id),
 	constraint fk_periododisciplina foreign key (id_periodo) references Periodo(id),
-  constraint fk_id_disciplina foreign key (id_disciplina) references Disciplina(id),
+    constraint fk_id_disciplina foreign key (id_disciplina) references Disciplina(id),
 );
 go
 
@@ -107,7 +110,7 @@ create table DisciplinaOfertada (
 
 
 	constraint pk_iddisciplinaofertada primary key(id),
-	constraint uq_iddisciplinaofertada unique (ano, semestre),
+	constraint uq_iddisciplinaofertada unique (ano, semestre, id_disciplina),
 	constraint fk_iddisciplinaofertada foreign key (id_disciplina) references Disciplina(id)
 );
 go
@@ -135,7 +138,7 @@ create table CursoTurma (
 );
 go
 
-create table Matricula( /* Pronto */
+create table Matricula(
 	id int IDENTITY(1,1) not null,
 	id_turma int not null,
 	id_aluno  int not null,
@@ -147,16 +150,16 @@ create table Matricula( /* Pronto */
 go
 
 create table Questao (
-  id int IDENTITY(1,1) not null,
+    id int IDENTITY(1,1) not null,
 	numero int not null,
 	data_limite_entrega date,
 	descricao text,
 	data date,
-  id_turma int not null,
+    id_turma int not null,
 
-  constraint pk_questao primary key (id),
-  constraint fk_questao_id_turma foreign key (id_turma) references Turma(id),
-	constraint uq_questao unique (numero)
+    constraint pk_questao primary key (id),
+    constraint fk_questao_id_turma foreign key (id_turma) references Turma(id),
+    constraint uq_questao unique (numero)
 );
 go
 
@@ -182,8 +185,8 @@ create table Resposta (
 	data_de_envio date,
 	id_questao int not null,
 
-	constraint uq_resposta unique (ra_aluno),
 	constraint pk_repsosta primary key (id),
+	constraint fk_respostaAluno foreign key (ra_aluno) references Aluno(id),
   constraint fk_resposta foreign key (id_questao) references Questao(id),
 );
 go
@@ -193,8 +196,9 @@ create table arquivosresposta (
 	arquivo varchar(500),
     id_resposta int not null,
 
+	constraint pk_arquivosresposta primary key (id),
 	constraint uq_arquivosresposta unique (arquivo),
 	constraint fk_arquivosreposta foreign key (id_resposta) references Resposta(id),
-	constraint pk_arquivosresposta primary key (id)
+	
 );
 go
