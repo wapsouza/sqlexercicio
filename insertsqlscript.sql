@@ -242,4 +242,3 @@ insert into arquivosresposta (arquivo, id_resposta) values
 ('alternativa C', 13),
 ('alternativa D', 14),
 ('alternativa E', 15);
-
