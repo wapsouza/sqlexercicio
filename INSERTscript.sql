@@ -6,8 +6,8 @@ Natalia Nadgela - 1700653
 Vinícius dos reis Oliveira - 1701731
 */
 
-Use Pmaster
-go
+USE PMASTER
+GO
 
 insert into Disciplina (nome, carga_horaria, teoria, pratica, ementa, competencias, habilidades, conteudo, biografia_basica, biografia_complementar) values 
 ( 'linguagem SQL', 80, 40, 40, 'conhecimento linguagem SQL com criacao e manipulacao de dados', 'logica de programacao', 'raciocinio logico', 'banco de dados', 'criando seu bd', 'google.com'),
