@@ -58,14 +58,14 @@ insert into Aluno (ra, nome, email, celular, id_curso) values
 
 
 insert into GradeCurricular (ano, semestre, id_curso) values 
-(2017, 2, 1),
-(2015, 6, 2),
+(2018, 2, 1),
+(2018, 2, 2),
 (2017, 1, 4),
-(2016, 1, 5),
-(2016, 4, 3),
-(2015, 2, 3),
-(2016, 2, 4),
+(2017, 1, 5),
+(2017, 1, 3),
 (2017, 2, 3),
+(2017, 2, 4),
+(2017, 1, 2),
 (2017, 1, 1),
 (2017, 2, 5),
 (2018, 1, 1),
@@ -74,7 +74,7 @@ insert into GradeCurricular (ano, semestre, id_curso) values
 
 
 insert into Periodo (numero, id_gradecurricular) values 
-( 6, 5),
+( 1, 4),
 ( 1, 1),
 ( 3, 3),
 ( 4, 4),
