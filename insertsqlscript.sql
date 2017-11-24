@@ -26,7 +26,7 @@ insert into Curso (sigla, nome) values
 
 
 insert into Professor (ra, apelido, nome, email, celular) values 
-(102017,  'Bolacha', 'Wellington Sanches', 'wellingtonfit@impacta.com.br', '11952945573'),
+(102017,  'Well', 'Wellington Sanches', 'wellingtonfit@impacta.com.br', '11952945573'),
 (112017, 'GeniusBd', 'Rodrigo Carvalho', 'Rodrigofit@impacta.com.br', '11952944563'),
 (122017,  'Ademir', 'Ademilson dos Santos Dias', 'ademilsonfit@impacta.com.br', '11952945573'),
 (132017,  'Mag', 'Magali de Oliveira Gonçalves', 'magalifit@impacta.com.br', '11942949573'),
@@ -101,12 +101,12 @@ insert into PeriodoDisciplina (id_periodo, id_disciplina) values
 insert into DisciplinaOfertada (ano, semestre, id_disciplina) values 
 (2017, 2, 1),
 (2017, 1, 3),
-(2015, 8, 3),
-(2016, 2, 5),
-(2017, 3, 4),
-(2017, 4, 5),
-(2018, 8, 1),
-(2018, 4, 2),
+(2017, 2, 3),
+(2017, 2, 5),
+(2017, 1, 4),
+(2017, 2, 4),
+(2017, 1, 1),
+(2017, 2, 2),
 (2018, 1, 1),
 (2018, 1, 2),
 (2018, 1, 3),
@@ -114,12 +114,19 @@ insert into DisciplinaOfertada (ano, semestre, id_disciplina) values
 
 
 insert into Turma (turno, id_professor, id_disciplinaofertada) values 
-('noite', 2, 5),
 ('matutino', 1, 1),
 ('matutino', 3, 3),
 ('matutino', 1, 4),
 ('noite', 4, 2),
-('noite', 5, 1);
+('noite', 5, 1),
+('matutino', 1, 3),
+('noite', 1, 2),
+('matutino', 1, 5),
+('noite', 2, 1),
+('matutino',2, 3),
+('noite', 2, 2),
+('matutino', 2, 5);
+
 
 
 insert into CursoTurma (id_turma, id_curso) values 
