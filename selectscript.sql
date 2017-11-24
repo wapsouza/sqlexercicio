@@ -4,9 +4,12 @@ FROM Aluno
 WHERE id_curso = 1;
 
 /* exercicio 2 */ 
-SELECT A.nome, A.Ra, Qs.numero, Qs.descricao, R.data_de_envio
-FROM questao AS Qs, Aluno AS A, Resposta AS R
-WHERE A.id = R.id_questao and R.id = Qs.id;
+
+SELECT D.Nome 
+FROM Disciplina AS D join DisciplinaOfertada AS DI ON (D.id = DI.id_disciplina) join PeriodoDisciplina AS PE ON (D.id = PE.id_disciplina)
+join Periodo AS P ON (P.id = PE.id_periodo) join GradeCurricular AS G ON ( G.id = P.id_gradecurricular ) join Curso AS C ON (C.id = G.id_curso) 
+WHERE C.sigla = 'SI' AND DI.ano = '2018' AND DI.semestre ='1';
+
 
 /* exercicio 3 */
 
@@ -36,10 +39,9 @@ FROM Aluno AS A join Curso AS C ON A.id_curso = C.id join GradeCurricular AS GC 
 WHERE GC.semestre = 2 and GC.ano = 2017;
 
 /* exercicio 6 */ 
-SELECT D.Nome 
-FROM Disciplina AS D join DisciplinaOfertada AS DI ON (D.id = DI.id_disciplina) join PeriodoDisciplina AS PE ON (D.id = PE.id_disciplina)
-join Periodo AS P ON (P.id = PE.id_periodo) join GradeCurricular AS G ON ( G.id = P.id_gradecurricular ) join Curso AS C ON (C.id = G.id_curso) 
-WHERE C.sigla = 'SI' AND DI.ano = '2018' AND DI.semestre ='1';
+SELECT Qs.numero, Qs.descricao, A.nome, A.Ra,  R.data_de_envio
+FROM questao AS Qs, Aluno AS A, Resposta AS R
+WHERE A.id = R.id_questao and R.id = Qs.id;
 
 /* exercicio 7 */
 
@@ -52,4 +54,3 @@ WHERE DO.semestre = 2 and ano = 2017
 
 
 , COUNT (T.id_professor) AS 'PROFESSORES QUE DAO AULA NESSE SEMESTRE'
-
