@@ -6,6 +6,8 @@ Kaua Ramirez - 1700652
 Natalia Nadgela - 1700653
 
 */
+USE Pmaster
+GO
 
 /* exercicio 1 */ 
 SELECT nome, email, ra 
