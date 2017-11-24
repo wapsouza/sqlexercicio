@@ -48,9 +48,14 @@ WHERE A.id = R.id_questao and R.id = Qs.id;
 SELECT DISTINCT COUNT(P.nome) AS 'TOTAL DE PROFESSORES CADASTRADOS'
 FROM Professor as P join Turma as T on (P.id = T.id_professor) join DisciplinaOfertada as DO on (T.id_disciplinaofertada = DO.id)
 WHERE DO.semestre = 2 and ano = 2017
+, /*COUNT (T.id_professor) AS 'PROFESSORES QUE DAO AULA NESSE SEMESTRE' */
 
+/* exercicio 8*/
 
+SELECT C.nome as 'NOME DO CURSO', COUNT (*) AS 'TOTAL DE ALUNOS'
+FROM Curso as C join Aluno as A on C.id = A.id_curso
+GROUP BY C.nome;
 ;
 
 
-, COUNT (T.id_professor) AS 'PROFESSORES QUE DAO AULA NESSE SEMESTRE'
+
